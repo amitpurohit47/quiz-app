@@ -1,0 +1,39 @@
+.flex{
+    display: flex;
+}
+
+.center{
+    align-items: center;
+}
+
+.justify-center{
+    justify-content: center;
+}
+
+.justify-space-between{
+    justify-content: space-between;
+}
+
+.cols{
+    flex-flow: column;
+}
+
+.home{
+    padding: 4rem;
+}
+
+.home-main{
+    width: 90%;
+}
+
+.home-left{
+    padding: 3rem;
+}
+
+.quiz-btn{
+    text-decoration: none;
+    color: white;
+    font-size: 1.1rem;
+    padding: 10px 20px;
+    background-color: #1db900;
+}

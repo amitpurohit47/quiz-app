@@ -5,6 +5,7 @@ import "./QuizMain.css";
 
 export default class Quiz extends Component {
   // initiating the local state
+
   state = {
     quiestions: {
       1: 'What US city is known as the "birthplace of jazz"?',
@@ -68,66 +69,79 @@ export default class Quiz extends Component {
   render() {
     let { quiestions, answers, correctAnswer, clickedAnswer, step, score } =
       this.state;
+    var style = step < 4 ? { "--value": step } : { "--value": score };
+
+    const ytLinks = [
+      "https://www.youtube.com/embed/E7wJTI-1dvQ",
+      "https://www.youtube.com/embed/E7wJTI-1dvQ",
+      "https://www.youtube.com/embed/E7wJTI-1dvQ",
+      "https://www.youtube.com/embed/E7wJTI-1dvQ",
+      "https://www.youtube.com/embed/E7wJTI-1dvQ",
+    ];
     return (
-      <div className="Content">
-        <h1>Score: {score}/3</h1>
-        {step <= Object.keys(quiestions).length ? (
-          <>
-            <Question question={quiestions[step]} />
-            <Answer
-              answer={answers[step]}
-              step={step}
-              checkAnswer={this.checkAnswer}
-              correctAnswer={correctAnswer}
-              clickedAnswer={clickedAnswer}
-            />
-            <button
-              className="NextStep"
-              disabled={
-                clickedAnswer && Object.keys(quiestions).length >= step
-                  ? false
-                  : true
-              }
-              onClick={() => this.nextStep(step)}
-            >
-              Next
-            </button>
-          </>
-        ) : (
-          <div className="finalPage">
-            <h1>You have completed the quiz!</h1>
-            <p>
-              Your score is: {score} of {Object.keys(quiestions).length}
-            </p>
-            <p>Thank you!</p>
-            <div className="frames flex justify-space-between" style={{marginTop: '30px'}}>
-              <iframe
-                src="https://www.youtube.com/embed/E7wJTI-1dvQ"
-                frameborder="0"
-                allow="autoplay; encrypted-media"
-                allowfullscreen
-                title="video"
-                style={{width:'32%'}}
-              />
-              <iframe
-                src="https://www.youtube.com/embed/E7wJTI-1dvQ"
-                frameborder="0"
-                allow="autoplay; encrypted-media"
-                allowfullscreen
-                title="video"
-                style={{width:'32%'}}
-              />
-              <iframe
-                src="https://www.youtube.com/embed/E7wJTI-1dvQ"
-                frameborder="0"
-                allow="autoplay; encrypted-media"
-                allowfullscreen
-                title="video"
-                style={{width:'32%'}}
-              />
-            </div>
+      <div className="Content-container">
+        <div className="Content">
+          <div className="flex center">
+            {step > 3 && (
+              <p style={{ fontWeight: "bold", marginRight: "10px" }}>
+                Final Score
+              </p>
+            )}
+            <div
+              role="progressbar"
+              aria-valuenow="0"
+              aria-valuemin="0"
+              aria-valuemax="3"
+              style={style}
+            ></div>
           </div>
-        )}
+          {step <= Object.keys(quiestions).length ? (
+            <>
+              <Question question={quiestions[step]} />
+              <Answer
+                answer={answers[step]}
+                step={step}
+                checkAnswer={this.checkAnswer}
+                correctAnswer={correctAnswer}
+                clickedAnswer={clickedAnswer}
+              />
+              <button
+                className="NextStep"
+                disabled={
+                  clickedAnswer && Object.keys(quiestions).length >= step
+                    ? false
+                    : true
+                }
+                onClick={() => this.nextStep(step)}
+              >
+                Next
+              </button>
+            </>
+          ) : (
+            <div className="finalPage">
+              <h1>You have completed the quiz!</h1>
+              <p>
+                Your score is: {score} of {Object.keys(quiestions).length}
+              </p>
+              <p>Thank you!</p>
+              <p>For more learning refer these links!</p>
+              <ul
+                className="frames flex justify-space-between"
+                style={{ marginTop: "30px",flexWrap:'wrap' }}
+              >
+                {ytLinks.map((link, i) => (
+                  <li style={{marginBottom:'10px'}} key={`ytlink${i}`}>
+                    <a
+                      href={link}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >{link}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
     );
   }

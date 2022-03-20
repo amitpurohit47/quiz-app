@@ -3,7 +3,6 @@
 .App {
   width: 100%;
   background-color: #F0F0F0;
-  height: 100vh;
   font-family: 'Raleway', sans-serif;
   display: flex;
   align-items: center;
@@ -11,8 +10,7 @@
 }
 .Content {
   display: table;
-  max-width: 800px;
-  width: 100%;
+  width: 800px;
   margin: 0 auto;
   background-color: #fff;
   padding: 30px;
